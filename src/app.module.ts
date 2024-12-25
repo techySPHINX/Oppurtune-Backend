@@ -9,6 +9,9 @@ import { UserService } from "./user/user.service";
 import { CompanyModule } from './company/company.module';
 import { PassportModule } from "@nestjs/passport";
 import { JwtModule } from "@nestjs/jwt";
+import { ApplicationModule } from './application/application.module';
+import { JobModule } from './job/job.module';
+import { ApplicationService } from "./application/application.service";
 
 @Module({
   imports: [  PassportModule.register({ defaultStrategy: 'jwt' }),
@@ -19,8 +22,8 @@ import { JwtModule } from "@nestjs/jwt";
         signOptions: { expiresIn: '1d' },
       }),
       inject: [ConfigService],
-    }),ConfigModule, UserModule, CompanyModule],
+    }),ConfigModule, UserModule, CompanyModule, ApplicationModule, JobModule],
   controllers: [AppController, UserController],
-  providers: [AppService, UserService, PrismaService],
+  providers: [AppService, UserService, PrismaService, ApplicationService],
 })
 export class AppModule {}
