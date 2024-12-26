@@ -20,7 +20,8 @@ export class CompanyController {
   @UseGuards(JwtAuthGuard)
   @Post('register')
   async registerCompany(
-    { req, registerCompanyDto }: { req: any, registerCompanyDto: RegisterCompanyDto },
+    @Req() req,
+    @Body() registerCompanyDto: RegisterCompanyDto,
   ) {
     const userId = req.user.id;
     const result = await this.companyService.registerCompany(
